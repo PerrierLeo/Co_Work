@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('firstname', 60);
             $table->string('lastname', 60);
+            $table->string('url_profile')->default('https://www.villascitemirabel.com/wp-content/uploads/2016/07/default-profile.png');
             $table->string('email', 60)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

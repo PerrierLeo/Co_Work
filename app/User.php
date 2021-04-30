@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,10 @@ class User extends Authenticatable
     // on définit la table users
     protected $table = 'users';
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'id'
+        'firstname', 'lastname', 'email', 'password', 'url_profile'
     ];
     protected $primaryKey = 'id'; //primary key de user
+
 
 
 

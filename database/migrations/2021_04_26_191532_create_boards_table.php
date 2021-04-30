@@ -18,7 +18,7 @@ class CreateBoardsTable extends Migration
 
             $table->unsignedBigInteger('user_id')->index();
             $table->string('name', 60);
-            $table->string('url_picture');
+            $table->string('url_picture')->default('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fond_blanc.svg/1200px-Fond_blanc.svg.png');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

@@ -13,11 +13,10 @@ class Lists extends Model
      * @var string
      */
     protected $table = 'lists';
-    protected $fillable = [
-        'board_id'
-    ];
+    protected $fillable = array('name');
     protected $primaryKey = 'id'; //primary key de lists
 
+    protected $guarded = ['board_id'];
 
 
     public function tickets()
@@ -25,7 +24,7 @@ class Lists extends Model
         return $this->hasMany('Ticket');
     }
 
-    public function listss()
+    public function lists()
     {
         return $this->belongsTo('App\Board');
     }

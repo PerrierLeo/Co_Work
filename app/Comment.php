@@ -13,6 +13,9 @@ class Comment extends Model
      * @var string
      */
     protected $table = 'comments';
+    protected $fillable = [
+        'ticket_id'
+    ];
 
     protected $primaryKey = 'id'; //primary key de comments
 

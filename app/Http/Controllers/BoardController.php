@@ -6,6 +6,8 @@ use App\Board;
 use App\User;
 use App\Lists;
 use App\Ticket;
+use App\Comment;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -13,14 +15,28 @@ use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
-    public function show($board)
+    protected function ticketsDisplay($lists)
+    {
+        $ticketsDisplay = [];
+        foreach ($lists as $list) {
+
+            $tickets = Ticket::where('list_id', $list->id)->get();
+            $ticketsDisplay[$list->id] = $tickets;
+        }
+        return $ticketsDisplay;
+    }
+    public function show(Request $request, $board)
     {
         // version non safe = $boards = \DB::select("select * from boards where id = $board");
+
         $boards = Board::where('id', $board)->first();
         $lists = Lists::where('board_id', $board)->get();
-        //$list_id = auth()->user()->boards()->with('lists.ticket')->where('board_id', $board)->first();
-        $tickets = Ticket::where('list_id', 8)->get();
-        return view('boards.show', ['board' => $boards, 'lists' => $lists, 'tickets' => $tickets]);
+        $tickets = $this->ticketsDisplay($lists);
+        $comments = \DB::table('comments')->get();
+        // $comments = Comment::select('id')->get();
+        // dd($comments);
+
+        return view('boards.show', ['board' => $boards, 'lists' => $lists, 'tickets' => $tickets, 'comments' => $comments]);
     }
 
 
